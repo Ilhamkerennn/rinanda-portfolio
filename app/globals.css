@@ -1,26 +1,350 @@
+
 @import "tailwindcss";
 
+/* ========================================
+   RINANDA PORTFOLIO — GLOBAL DESIGN SYSTEM
+   Theme: Charcoal / Electric Lime
+======================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #090b0a;
+  --background-soft: #101310;
+  --foreground: #f4f7f2;
+
+  --muted: #a4ada2;
+  --soft-muted: #7d887c;
+
+  --card: rgba(19, 23, 19, 0.82);
+  --card-strong: rgba(14, 17, 14, 0.96);
+
+  --border: rgba(197, 255, 91, 0.15);
+  --accent: #c5ff5b;
+  --accent-strong: #a8ed36;
+  --accent-soft: rgba(197, 255, 91, 0.1);
+
+  --font-main: var(--font-plus-jakarta-sans);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 body {
-  background: var(--background);
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      ellipse at 12% 0%,
+      rgba(197, 255, 91, 0.075),
+      transparent 32%
+    ),
+    radial-gradient(
+      ellipse at 95% 28%,
+      rgba(70, 105, 52, 0.09),
+      transparent 30%
+    ),
+    linear-gradient(180deg, #090b0a 0%, #0c0f0c 52%, #090b0a 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-main), sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html,
+body,
+button,
+a,
+input,
+textarea,
+select,
+label,
+span,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+small,
+strong,
+code {
+  font-family: var(--font-main), sans-serif;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(197, 255, 91, 0.88);
+  color: #10130c;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* Subtle technical grid background */
+
+.section-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.section-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px
+    );
+  background-size: 64px 64px;
+  pointer-events: none;
+  mask-image: linear-gradient(
+    to bottom,
+    black,
+    transparent 90%
+  );
+}
+
+/* Premium cards */
+
+.soft-card {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(27, 33, 25, 0.92),
+      rgba(13, 16, 13, 0.96)
+    );
+  border: 1px solid var(--border);
+  border-radius: 1.5rem;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(16px);
+  transition:
+    border-color 300ms ease,
+    transform 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.soft-card::after {
+  content: "";
+  position: absolute;
+  top: -70px;
+  right: -70px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(197, 255, 91, 0.09),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.soft-card:hover {
+  border-color: rgba(197, 255, 91, 0.32);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.38);
+}
+
+.glass-panel {
+  background: rgba(13, 16, 13, 0.76);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+}
+
+/* Hero badge */
+
+.hero-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 1rem 0.55rem 0.65rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(197, 255, 91, 0.2);
+  background: rgba(197, 255, 91, 0.055);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.hero-badge::before {
+  content: "";
+  width: 0.65rem;
+  height: 0.65rem;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  background: var(--accent);
+  box-shadow: 0 0 18px rgba(197, 255, 91, 0.65);
+}
+
+/* Accent utilities */
+
+.text-accent {
+  color: var(--accent);
+}
+
+.accent-glow {
+  box-shadow: 0 0 45px rgba(197, 255, 91, 0.12);
+}
+
+.accent-gradient {
+  background: linear-gradient(
+    110deg,
+    #f5f8f0 0%,
+    #c5ff5b 48%,
+    #8bdc3c 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Animation */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes borderGlow {
+  0%,
+  100% {
+    border-color: rgba(197, 255, 91, 0.12);
+  }
+
+  50% {
+    border-color: rgba(197, 255, 91, 0.35);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.8s ease-out both;
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 5s ease-in-out infinite;
+}
+
+.animate-border-glow {
+  animation: borderGlow 4s ease-in-out infinite;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090b0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #30382b;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #657d43;
+}
+
+/* Mobile refinements */
+
+@media (max-width: 640px) {
+  .soft-card {
+    border-radius: 1.15rem;
+  }
+
+  .section-shell::before {
+    background-size: 40px 40px;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
